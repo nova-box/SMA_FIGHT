@@ -44,10 +44,12 @@
 		
 		override protected function UpdateFacts() : void
 		{
+			super.UpdateFacts();
 		}
 		
 		override protected function Act() : void
 		{
+			super.Act();
 		}
 	}
 }

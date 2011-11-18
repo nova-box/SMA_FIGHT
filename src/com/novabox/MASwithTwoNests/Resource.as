@@ -1,5 +1,6 @@
 ﻿package com.novabox.MASwithTwoNests 
 {
+	import flash.geom.Point;
 	
 	/**
 	 * Cognitive Multi-Agent System Example
@@ -12,6 +13,10 @@
 	public class Resource extends Agent
 	{
 		private var life:Number;
+		private var moveDelay:Number;
+		private var updateTime:Number;
+		private var direction:Point;
+		private var speed:Number;
 		
 		public function Resource() 
 		{
@@ -19,8 +24,12 @@
 			life = 0;
 		}
 		
-		public function Initialize(_life:Number) : void
+		public function Initialize(_life:Number, _moveDelay:Number, _speed:Number) : void
 		{
+			moveDelay = _moveDelay;
+			speed = _speed;
+			updateTime = 0;
+			
 			var startLife:Number = _life;
 			
 			if (World.RESOURCE_RANDOM_START_LIFE)
@@ -29,7 +38,7 @@
 			}
 			
 			SetLife(startLife);
-			
+			ChangeDirection();
 			DrawSprite();
 		}
 		
@@ -59,7 +68,33 @@
 		
 		override public function Update() : void
 		{
+			updateTime += TimeManager.timeManager.GetFrameDeltaTime();
+			if ((updateTime > moveDelay) || (Main.world.IsOut(targetPoint)))
+			{
+				ChangeDirection();
+				updateTime = 0;
+			}
+			targetPoint.x = targetPoint.x + direction.x * speed * TimeManager.timeManager.GetFrameDeltaTime()/1000;
+			targetPoint.y = targetPoint.y + direction.y * speed * TimeManager.timeManager.GetFrameDeltaTime() / 1000;;
+			
 			DrawSprite();
+		}
+		
+		protected function ChangeDirection() : void
+		{
+			direction = new Point(Math.random(), Math.random());
+			
+			if (Math.random() > 0.5)
+			{
+				direction.x = direction.x * -1;
+			}
+			if (Math.random() > 0.5)
+			{
+				direction.y = direction.y * -1;
+			}			
+			direction.normalize(1);
+		
+			trace("Change Direction");
 		}
 		
 		protected function DrawSprite() : void

@@ -22,7 +22,7 @@
 		public static const WORLD_HEIGHT:Number = 600;
 		
 		public static const BOT_RADIUS:Number = 2;
-		public static const BOT_PERCEPTION_RADIUS:Number = 50;
+		public static const BOT_PERCEPTION_RADIUS:Number = 40;
 		public static const BOT_COUNT:Number = 80;
 		public static const BOT_INIT_POSITION:Point = new Point(WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
 		public static const BOT_SPEED:Number = 100;
@@ -33,7 +33,8 @@
 		public static const RESOURCE_UPDATE_VALUE:Number = 0.1;
 		public static const RESORUCE_RESPAWN_DELAY:Number = 500;
 		public static const RESOURCE_COUNT:Number = 15;
-		
+		public static const RESOURCE_MOVE_DELAY:Number = 7000;
+		public static const RESOURCE_MOVE_SPEED:Number = 110;
 		
 		//WORLD PARAMETERS
 		public static var HOME_RADIUS:Number						= 10;
@@ -44,11 +45,9 @@
 		
 		//TEAM PARAMETERS
 		public static const CUSTOM_TEAM:BotTeam = new BotTeam(	"CustomTeam",
-																0xBB2222,
+																0xFF0000,
 																new Array(CustomAgentType.CUSTOM_BOT));
-																
-		
-																
+																																
 		private var agents:Array;
 
 		private var size:Point;
@@ -77,7 +76,7 @@
 			{
 				var resource:Resource = new Resource();
 				
-				resource.Initialize(RESOURCE_START_LIFE);
+				resource.Initialize(RESOURCE_START_LIFE, RESOURCE_MOVE_DELAY * Math.random(), RESOURCE_MOVE_SPEED * Math.random() );
 				
 				var position:Point = new Point(Math.random() * WORLD_WIDTH, Math.random() * WORLD_HEIGHT);
 				
