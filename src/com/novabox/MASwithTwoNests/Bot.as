@@ -29,7 +29,7 @@
 		protected var perceptionRadius:Number;
 		
 		protected var teamId:String;
-		private var color:int;
+		protected var color:int;
 		
 
 		//Decision paramaters
@@ -381,7 +381,7 @@
 		{
 			if (seenResource != null)
 			{
-				direction = seenResource.GetTargetPoint().subtract(targetPoint);
+				direction = seenResource.GetCurrentPoint().subtract(targetPoint);
 			
 				direction.normalize(1);
 				

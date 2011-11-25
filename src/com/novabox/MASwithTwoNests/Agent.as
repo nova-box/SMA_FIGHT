@@ -38,9 +38,14 @@
 			
 		}
 		
+		public function GetCurrentPoint() : Point
+		{
+			return new Point(this.x, this.y);
+		}
+		
 		public function GetTargetPoint() : Point
 		{
-			return targetPoint;
+			return new Point(targetPoint.x, targetPoint.y);
 		}
 		
 		public function SetTargetPoint(_point:Point) : void

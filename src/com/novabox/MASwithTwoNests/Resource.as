@@ -93,8 +93,6 @@
 				direction.y = direction.y * -1;
 			}			
 			direction.normalize(1);
-		
-			trace("Change Direction");
 		}
 		
 		protected function DrawSprite() : void
